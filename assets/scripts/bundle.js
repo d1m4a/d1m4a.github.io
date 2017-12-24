@@ -1,1 +1,238 @@
-!function(e){function n(o){if(t[o])return t[o].exports;var l=t[o]={i:o,l:!1,exports:{}};return e[o].call(l.exports,l,l.exports,n),l.l=!0,l.exports}var t={};n.m=e,n.c=t,n.d=function(e,t,o){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:o})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},n.p="",n(n.s=1)}([,function(e,n){function t(e){o[u].className="slide",u=(e+o.length)%o.length,o[u].className="slide showing"}const o=document.querySelectorAll("#slides .slide"),l=document.getElementById("next"),r=document.getElementById("previous"),c=document.querySelectorAll(".controls");let u=0;e.exports=function(){0!==slide.length&&(l.onclick=function(){t(u+1)},r.onclick=function(){t(u-1)},function(){for(var e=0;e<c.length;e++)c[e].style.display="inline-block"}())}}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const slider = __webpack_require__(1);
+const map = __webpack_require__(2);
+/* const $ = require('jquery');*/
+
+
+slider(); /* иницииализируем слайдер */
+console.log('slider подключен');
+
+map(); /* инициализируем стилизацию карты */
+console.log('карта подключена');
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+const slides = document.querySelectorAll('#slides .slide'); /* кол-во слайдов */
+const next = document.getElementById('next'); /* кнопочка следующий слайд */
+const previous = document.getElementById('previous'); /* кнопочка предыдущий слайд */
+const controls = document.querySelectorAll('.controls'); /* кнопочки контроля за листанием слайдов */
+
+console.log();
+
+let currentSlide = 0;
+
+/* осуществляет переход к слайду номер n (начиная с 0) */
+function goToSlide(n){
+    slides[currentSlide].className = 'slide'; /* беретcя n-ный слайд с классом slide */
+    currentSlide = (n+slides.length)%slides.length; /* остаток от деления */
+    slides[currentSlide].className = 'slide showing'; /* присваеваем этому слайду класс Showing т.е. показываем его */
+}
+
+/* навешиваем обработкчики событий на элементы next и previous */
+function setupListners(){
+    next.onclick = function(){
+        goToSlide(currentSlide+1);
+        console.log('клик след');
+    }
+    previous.onclick = function(){
+        goToSlide(currentSlide-1);
+        console.log('клик пред');
+    }
+}
+
+/* показываем кнопочки для навигации (в случае если js не загрузится клиент не увидит кнопок, а только картинки) */
+function showButtons(){
+    for(var i=0; i<controls.length; i++){
+        controls[i].style.display = 'inline-block';
+    }
+}
+
+/* инициализация слайдера */
+function sliderInit(){
+    if(slides.length !== 0) { /* на странице есть нужный html код */
+        setupListners();
+        showButtons();
+    }
+}
+
+module.exports = sliderInit;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+
+function initMap() {
+
+	var map = new google.maps.Map(document.getElementById('map'), {
+
+		center: {lat: 56.026876, lng: 92.865734},
+
+		zoom: 12,
+
+		styles: [
+            {
+                "featureType": "administrative",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#444444"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative.neighborhood",
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    }
+                ]
+            },
+            {
+                "featureType": "landscape",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "color": "#f2f2f2"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "saturation": -100
+                    },
+                    {
+                        "lightness": 45
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "simplified"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "color": "#ff9900"
+                    },
+                    {
+                        "visibility": "on"
+                    }
+                ]
+            }
+        ]
+	});
+}
+//window.initMap = initMap;
+module.exports = initMap;
+
+/***/ })
+/******/ ]);

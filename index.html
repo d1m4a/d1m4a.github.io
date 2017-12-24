@@ -9,12 +9,14 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
     <link rel="stylesheet" href="/assets/styles/app.min.css">
-    <script src="/assets/scripts/bundle.js" defer></script>
   </head>
   <body>
-    <div class="preloader"></div>
+    <div class="preloader" id="preloader">
+      <div id="spinner"></div>
+    </div>
     <main class="main">
       <section class="welcome">
+        <div class="welcome__bg"></div>
         <div class="welcome__topbar clearfix"><a class="welcome__auth-button" id="js-auth-btn" href="#auth">Авторизоваться</a></div>
         <div class="welcome__wrapper author-card__container">
           <div class="author-card__cards">
@@ -46,7 +48,7 @@
               </div>
               <div class="author-card__footer">
                 <ul class="author-menu">
-                  <li class="author-menu__item"><a class="author-menu__link" href="/my-wroks.html">Мои работы</a></li>
+                  <li class="author-menu__item"><a class="author-menu__link" href="/my-works.html">Мои работы</a></li>
                   <li class="author-menu__item"><a class="author-menu__link" href="/about.html">Обо мне</a></li>
                   <li class="author-menu__item"><a class="author-menu__link" href="/blog.html">Блог</a></li>
                 </ul>
@@ -111,5 +113,6 @@
         <div class="welcome__footer"><span class="welcome__footer-author">© Чех Дмитрий</span> создано с любовью в LoftSchool | 2017</div>
       </section>
     </main>
+    <script src="/assets/scripts/bundle.js" defer></script>
   </body>
 </html>
