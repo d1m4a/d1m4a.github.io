@@ -67,9 +67,14 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
+//import $ from 'jquery';
+
 const slider = __webpack_require__(1);
 const map = __webpack_require__(2);
-/* const $ = require('jquery');*/
+const preloader = __webpack_require__(3);
+const hamburger = __webpack_require__(4);
+const authorize = __webpack_require__(5);
+//const $ = require('jquery');
 
 
 slider(); /* иницииализируем слайдер */
@@ -77,6 +82,16 @@ console.log('slider подключен');
 
 map(); /* инициализируем стилизацию карты */
 console.log('карта подключена');
+
+preloader(); /* инициализация прелоадера */
+console.log('прелоадер активирован');
+
+hamburger(); /* инициализация hamburger */
+console.log('hamburger активирован');
+
+authorize(); /* инициализируем скрипта авторизации */
+console.log('авторизация подключена');
+
 
 /***/ }),
 /* 1 */
@@ -233,6 +248,78 @@ function initMap() {
 }
 //window.initMap = initMap;
 module.exports = initMap;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+
+    document.body.onload = function(){
+
+        setTimeout(function(){
+            var preloader = document.getElementById("preloader");
+                if (!preloader.classList.contains('done')){
+                    preloader.classList.add('done');
+                }
+        }, 1000);
+    };
+
+
+module.exports = preloader;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+
+    const toggles = document.querySelectorAll(".menu__toggle");
+    const container = document.querySelector('.menu__container');
+    const menu = document.querySelector('.menu__list');
+
+   
+    for (var i = toggles.length - 1; i >= 0; i--) {
+      var toggle = toggles[i];
+      toggleHandler(toggle);
+    };
+   
+    function toggleHandler(toggle) {
+      toggle.addEventListener( "click", function(e) {
+        e.preventDefault();
+        if(this.classList.contains("active") === true) { 
+          this.classList.remove("active")
+          container.classList.remove('menu__container--open')
+          menu.classList.remove('menu__list--open')
+        } else { 
+          this.classList.add("active");
+          container.classList.add('menu__container--open')
+          menu.classList.add('menu__list--open')
+        }
+      });
+    }
+
+
+module.exports = hamburger;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+function auth () {
+
+    const btnAuth = document.getElementById('auth-btn');
+    const containerFlip = document.getElementById('flip');
+    console.log(btnAuth);
+    console.log(containerFlip);
+    btnAuth.addEventListener( "click", function(e) {
+        e.preventDefault();
+        containerFlip.classList.add('author-card__cards--open');
+        this.classList.add('hidden');
+    });
+}
+
+auth();
+
+module.exports = authorize;
 
 /***/ })
 /******/ ]);

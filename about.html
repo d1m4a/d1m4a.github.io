@@ -7,14 +7,16 @@
     <meta content="" name="keywords">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <link rel="icon" type="image/png" href="assets/images/fav_desert.png">
     <link rel="stylesheet" href="/assets/styles/app.min.css">
   </head>
   <body>
     <div class="preloader" id="preloader">
-      <div id="spinner"></div>
+      <div class="spinner" id="spinner">
+        <div class="loader"></div>
+      </div>
     </div>
     <main class="main">
-      <!--include ../common/header-->
       <header class="section hero">
         <div class="hero__socials">
           <ul class="socials">
@@ -32,7 +34,9 @@
                 </svg></a></li>
           </ul>
         </div>
-        <div class="hero__menu"><a class="menu" href="#menu"><span class="menu__gamburger"></span></a></div>
+        <div class="hero__menu">
+          <button class="menu__toggle menu__toggle-htx"><span>Меню</span></button>
+        </div>
         <div class="hero__title">
           <div class="section-title"><img class="section-title__pic" src="assets/images/portfolio_header.svg" alt="portfolio"/></div>
           <div class="hero__user">
@@ -270,6 +274,14 @@
         </div>
       </div>
     </footer>
+    <div class="menu__container">
+      <ul class="menu__list">
+        <li class="menu__item"><a class="menu__link" href="/my-works.html">Мои работы</a></li>
+        <li class="menu__item"><a class="menu__link" href="/blog.html">Блог</a></li>
+        <li class="menu__item"><a class="menu__link" href="/about.html">Обо мне</a></li>
+        <li class="menu__item"><a class="menu__link" href="/index.html">Авторизация</a></li>
+      </ul>
+    </div>
     <script src="/assets/scripts/bundle.js" defer></script>
   </body>
 </html>
