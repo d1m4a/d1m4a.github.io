@@ -10,7 +10,9 @@
     <link rel="icon" type="image/png" href="assets/images/fav_desert.png">
     <link rel="stylesheet" href="/assets/styles/app.min.css">
   </head>
-  <body>
+  <body><!--[if lt IE 9]>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
     <div class="preloader" id="preloader">
       <div class="spinner" id="spinner">
         <div class="loader"></div>
@@ -49,13 +51,10 @@
             </div>
           </div>
         </div>
-        <div class="hero__arrow">
-          <div class="arrow-down">
+        <div class="hero__arrow"><a class="arrow-down" href="#">
             <svg class="arrow-down__ic">
               <use xlink:href="/assets/images/svg/symbols.svg#arrow_down"></use>
-            </svg>
-          </div>
-        </div>
+            </svg></a></div>
       </header>
       <div class="triangle__wrapper">
         <div class="triangle__side">
@@ -116,6 +115,6 @@
         <li class="menu__item"><a class="menu__link" href="/index.html">Авторизация</a></li>
       </ul>
     </div>
-    <script src="/assets/scripts/bundle.js" defer></script>
+    <script src="/assets/scripts/bundle.js"></script>
   </body>
 </html>

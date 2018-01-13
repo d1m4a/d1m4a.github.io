@@ -67,32 +67,43 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
+let domready = function() {
 
-const slider = __webpack_require__(1);
-const map = __webpack_require__(2);
-const preloader = __webpack_require__(3);
-const hamburger = __webpack_require__(4);
-const flip = __webpack_require__(5);
-const skills = __webpack_require__(6);
+    const slider = __webpack_require__(1);
+    const initMap = __webpack_require__(2);
+    const preloader = __webpack_require__(3);
+    const hamburger = __webpack_require__(4);
+    const flip = __webpack_require__(5);
+    const skills = __webpack_require__(6);
 
-slider(); /* иницииализируем слайдер */
-console.log('slider подключен');
+    slider(); /* иницииализируем слайдер */
+    console.log('slider подключен');
 
-map(); /* инициализируем стилизацию карты */
-console.log('карта подключена');
+    initMap(); /* инициализируем стилизацию карты */
+    console.log('initmap подключена');
 
-preloader(); /* инициализация прелоадера */
-console.log('прелоадер активирован');
+    preloader(); /* инициализация preloader */
+    console.log('preloader подключен');
 
-hamburger(); /* инициализация hamburger */
-console.log('hamburger активирован');
+    hamburger(); /* инициализация hamburger */
+    console.log('hamburger подключен');
 
-flip(); /* инициализируем скрипта flip */
-console.log('flip подключена');
+    flip(); /* инициализируем скрипта flip */
+    console.log('flip подключен');
 
-skills(); /* инициализируем скрипта skills */
-console.log('skills подключеы');
+    skills(); /* инициализируем скрипта skills */
+    console.log('skills подключен');
 
+};
+
+if (
+    document.readyState === "complete" ||
+    (document.readyState !== "loading" && !document.documentElement.doScroll)
+  ) {
+    domready();
+  } else {
+    document.addEventListener("DOMContentLoaded", domready);
+  }
 
 
 /***/ }),
@@ -152,21 +163,30 @@ module.exports = slider => {
 
 module.exports = initMap => {
 
-    function initMap() {
+    const mapwrap = document.getElementById('map');
 
-        GoogleMapsLoader.KEY = "AIzaSyDhQNTgjvezECxXDnOfqiL3S36LVJp01z4";
+    if(mapwrap){
 
-        GoogleMapsLoader.load(function(google) {
+        google.maps.event.addDomListener(window, 'load', initMap);
 
-            var maps = document.getElementById('map');
+        function initMap() {
 
-            var map = new google.maps.Map(maps, {
+            var mapOptions = {
                 zoom: 12,
-                center: {lat: 56.026876, lng: 92.865734},
-                mapTypeControl: false,
-                disableDefaultUI: true,
-                mapTypeId: "satellite",
-                styles: [
+                center: new google.maps.LatLng (56.026876, 92.865734),
+                styles:[
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "visibility": "on"
+                            },
+                            {
+                                "color": "#000000"
+                            }
+                        ]
+                    },
                     {
                         "featureType": "administrative",
                         "elementType": "labels.text.fill",
@@ -177,11 +197,20 @@ module.exports = initMap => {
                         ]
                     },
                     {
-                        "featureType": "administrative.neighborhood",
+                        "featureType": "administrative",
                         "elementType": "labels.icon",
                         "stylers": [
                             {
-                                "visibility": "on"
+                                "hue": "#ff0000"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative.province",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "visibility": "off"
                             }
                         ]
                     },
@@ -191,6 +220,15 @@ module.exports = initMap => {
                         "stylers": [
                             {
                                 "color": "#f2f2f2"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape.man_made",
+                        "elementType": "labels",
+                        "stylers": [
+                            {
+                                "saturation": "36"
                             }
                         ]
                     },
@@ -247,7 +285,7 @@ module.exports = initMap => {
                         "elementType": "all",
                         "stylers": [
                             {
-                                "color": "#ff9900"
+                                "color": "#e7a731"
                             },
                             {
                                 "visibility": "on"
@@ -255,9 +293,14 @@ module.exports = initMap => {
                         ]
                     }
                 ]
-            });
-        });
-    }
+            };
+
+            var mapElement = document.getElementById('map');
+            var map = new google.maps.Map(mapElement, mapOptions);
+
+        };
+    };
+
 };
 
 /***/ }),
@@ -318,16 +361,18 @@ module.exports = flip => {
     const containerFlip = document.getElementById('flip');
     const btnAuthBack = document.getElementById('btn-auth-back');
 
-    btnAuth.addEventListener( "click", function(e) {
-        e.preventDefault();
-        containerFlip.classList.add('author-card__cards--open');
-        this.classList.add('hidden');
-    });
-    btnAuthBack.addEventListener( "click", function(e) {
-        e.preventDefault();
-        containerFlip.classList.remove('author-card__cards--open');
-        btnAuth.classList.remove('hidden');
-    });
+    if(containerFlip){
+        btnAuth.addEventListener( "click", function(e) {
+            e.preventDefault();
+            containerFlip.classList.add('author-card__cards--open');
+            this.classList.add('hidden');
+        });
+        btnAuthBack.addEventListener( "click", function(e) {
+            e.preventDefault();
+            containerFlip.classList.remove('author-card__cards--open');
+            btnAuth.classList.remove('hidden');
+        });
+    };
 };
 
 /***/ }),
