@@ -79,7 +79,7 @@ let domready = function() {
     slider(); /* иницииализируем слайдер */
     console.log('slider подключен');
 
-    initMap(); /* инициализируем стилизацию карты */
+    /*initMap(); */ /* инициализируем стилизацию карты */
     console.log('initmap подключена');
 
     preloader(); /* инициализация preloader */
