@@ -161,7 +161,7 @@ module.exports = slider => {
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = initMap => {
+/* module.exports = initMap => {
 
     const mapwrap = document.getElementById('map');
 
@@ -302,7 +302,7 @@ module.exports = initMap => {
     };
 
 };
-
+*/
 /***/ }),
 /* 3 */
 /***/ (function(module, exports) {
